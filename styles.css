@@ -12,6 +12,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
     overflow-y: scroll;
 }
 
@@ -26,7 +27,7 @@ body {
 
 .container {
     width: 90%;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 0 auto;
     padding: 20px;
 }
@@ -175,8 +176,6 @@ h2 {
     margin-right: 10px;
 }
 
-
-
 footer {
     background-color: var(--card-background);
     text-align: center;
@@ -186,7 +185,82 @@ footer {
     border-top: 2px solid var(--primary-color);
 }
 
-/* Responsive Design */
+/* Swiper carousel integration */
+.carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding: 0 40px;
+}
+
+.swiper {
+    padding-bottom: 40px;
+}
+
+.swiper-slide.project-card {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(255, 69, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 15px 0px;
+}
+
+.swiper-slide.project-card:hover {
+    transform: translateY(-10px);
+}
+
+.project-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    display: block;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color) !important;
+    font-size: 2rem;
+    z-index: 10;
+    transition: transform 0.2s ease-in-out;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    transform: translateY(-50%) scale(1.2);
+    color: var(--hover-color);
+}
+
+.swiper-button-prev {
+    left: 10px;
+}
+
+.swiper-button-next {
+    right: 10px;
+}
+
+.swiper-pagination-bullet {
+    background-color: var(--secondary-color);
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--primary-color);
+    opacity: 1;
+}
+
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
@@ -212,5 +286,14 @@ footer {
         gap: 15px;
         padding: 10px;
         font-size: 14px;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        font-size: 1.5rem;
+    }
+
+    .carousel-wrapper {
+        padding: 0 20px;
     }
 }

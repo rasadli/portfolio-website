@@ -20,6 +20,10 @@
         content="Portfolio of Rashad Asadli, a Back-End Developer specializing in .NET, SQL, and C#.">
     <meta property="og:image" content="https://yourwebsite.com/image.png">
     <meta property="og:url" content="https://yourwebsite.com">
+
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 </head>
 
 <body>
@@ -36,7 +40,7 @@
                     <li><a href="#contact">Contact</a></li>
                     <li>
                         <a href="downloads/Rashad_Asadli_CV.pdf" target="_blank" class="cv-download">
-                             Resume
+                            Resume
                         </a>
                     </li>
                 </ul>
@@ -52,30 +56,85 @@
 
     <section id="projects" class="container">
         <h2>Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>Sensible Accounting Software</h3>
-                <p>Online accounting tool for sole proprietors.</p>
-                <a href="https://sensible.az/" target="_blank" class="project-link">
-                    <i class="fas fa-external-link-alt"></i> Visit Website
-                </a>
+        <div class="carousel-wrapper">
+            <div class="swiper-button-prev">&#10094;</div>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide project-card">
+                        <img src="images/sensible.png" alt="Sensible Accounting Screenshot" class="project-img">
+                        <h3>Sensible Accounting Software</h3>
+                        <p>Automated accounting system for sole proprietors using C#, .NET Core, and SQL. Reduced manual
+                            bookkeeping by 45% and query time by 30%.</p>
+                        <a href="https://sensible.az/" target="_blank" class="project-link">Visit Website</a>
+                    </div>
+
+                    <div class="swiper-slide project-card">
+                        <img src="images/kral.png" alt="Kral Inshaat Screenshot" class="project-img">
+                        <h3>Kral Inshaat Website</h3>
+                        <p>E-commerce platform with secure payment, live order tracking (Telegram bot), and a
+                            streamlined admin panel.</p>
+                        <a href="https://kral-insaat.millisoft.az/" target="_blank" class="project-link">Visit
+                            Website</a>
+                    </div>
+
+                    <div class="swiper-slide project-card">
+                        <img src="images/bakerfresh.png" alt="BakerFresh Screenshot" class="project-img">
+                        <h3>BakerFresh</h3>
+                        <p>Bakery management system in ASP.NET Core. Features user registration, product orders, and
+                            admin controls.</p>
+                        <a href="https://rasadli.github.io/portfolio-website" target="_blank" class="project-link">Visit
+                            Website</a>
+                    </div>
+
+                    <div class="swiper-slide project-card">
+                        <img src="images/beyazmarket.png" alt="Beyaz Market Screenshot" class="project-img">
+                        <h3>Beyaz Market</h3>
+                        <p>Responsive grocery store website with multilingual support and Google Maps integration.</p>
+                        <a href="https://rasadli.github.io/portfolio-website" target="_blank" class="project-link">Visit
+                            Website</a>
+                    </div>
+
+                    <div class="swiper-slide project-card">
+                        <img src="images/hesabat.png" alt="MS Accounting Screenshot" class="project-img">
+                        <h3>MS Accounting</h3>
+                        <p>Web app for school financial management with invoicing, reporting, and performance tracking.
+                        </p>
+                        <a href="https://rasadli.github.io/portfolio-website" target="_blank" class="project-link">Visit
+                            Website</a>
+                    </div>
+
+                    <div class="swiper-slide project-card">
+                        <img src="images/recipe.jpeg" alt="Recipe Manager Screenshot" class="project-img">
+                        <h3>RecipeManagerApp</h3>
+                        <p>React app for recipe CRUD with tag filters, pagination, and drag-and-drop reordering.</p>
+                        <a href="https://rasadli.github.io/portfolio-website" target="_blank" class="project-link">Visit
+                            Website</a>
+                    </div>
+
+                    <div class="swiper-slide project-card">
+                        <img src="images/autoformfiller.jpeg" alt="Auto Form Filler Screenshot" class="project-img">
+                        <h3>AutoFormFiller</h3>
+                        <p>Chrome extension using Node.js and jQuery to auto-fill job forms using LinkedIn data.</p>
+                        <a href="https://rasadli.github.io/portfolio-website" target="_blank" class="project-link">Visit
+                            Website</a>
+                    </div>
+
+                    <div class="swiper-slide project-card">
+                        <img src="images/library.jpeg" alt="Library System Screenshot" class="project-img">
+                        <h3>Library Management System</h3>
+                        <p>Java desktop app to manage personal book libraries with rating and categorization features.
+                        </p>
+                        <a href="https://rasadli.github.io/portfolio-website" target="_blank" class="project-link">Visit
+                            Website</a>
+                    </div>
+
+                </div>
             </div>
-            <div class="project-card">
-                <h3>Kral Inshaat Website</h3>
-                <p>E-commerce platform for a construction materials store.</p>
-                <a href="https://kral-insaat.millisoft.az/" target="_blank" class="project-link">
-                    <i class="fas fa-external-link-alt"></i> Visit Website
-                </a>
-            </div>
-            <div class="project-card">
-                <h3>Master School Reporting Website</h3>
-                <p>Management system for educational institutions.</p>
-                <a href="https://hesabat.millisoft.az/" target="_blank" class="project-link">
-                    <i class="fas fa-external-link-alt"></i> Visit Website
-                </a>
-            </div>
+            <div class="swiper-button-next">&#10095;</div>
         </div>
     </section>
+
 
     <section id="skills" class="container">
         <h2>Skills</h2>
@@ -129,5 +188,41 @@
         </div>
     </footer>
 </body>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.mySwiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        breakpoints: {
+            480: {
+                slidesPerView: 1
+            },
+            640: {
+                slidesPerView: 2
+            },
+            768: {
+                slidesPerView: 2
+            },
+            900: {
+                slidesPerView: 3
+            },
+            1200: {
+                slidesPerView: 4
+            },
+            1600: {
+                slidesPerView: 5
+            }
+        }
+    });
+</script>
 
 </html>
