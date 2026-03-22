@@ -1,228 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rashad Asadli | Back-End Developer</title>
-    <meta property="og:url" content="https://rasadli.github.io/portfolio-website/">
-
-    <meta name="description"
-        content="Portfolio of Rashad Asadli, a Back-End Developer specializing in .NET, SQL, and C#.">
-    <meta name="keywords" content="Back-End Developer, .NET, SQL, C#, Rashad Asadli, Portfolio">
+    <title>Rashad Asadli | .NET Backend Developer</title>
+    <meta name="description" content="Portfolio of Rashad Asadli, a .NET backend developer focused on scalable web applications, SQL-backed systems, and clean engineering practices.">
+    <meta name="keywords" content="Rashad Asadli, .NET developer, backend developer, C#, ASP.NET Core, SQL Server, Entity Framework, portfolio">
     <meta name="author" content="Rashad Asadli">
-    <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/000000/code.png"> <!-- Online icon -->
-    <link rel="stylesheet" href="styles.css">
+    <meta property="og:title" content="Rashad Asadli | .NET Backend Developer">
+    <meta property="og:description" content="Backend-focused portfolio featuring .NET, SQL, clean architecture, and real-world web application projects.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/000000/code.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-improved.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="Rashad Asadli | Back-End Developer">
-    <meta property="og:description"
-        content="Portfolio of Rashad Asadli, a Back-End Developer specializing in .NET, SQL, and C#.">
-    <meta property="og:image" content="https://yourwebsite.com/image.png">
-    <meta property="og:url" content="https://yourwebsite.com">
-
-    <!-- Swiper.js CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
 </head>
-
 <body>
-    <header>
-        <div class="container">
-            <h1>Rashad Asadli</h1>
-            <p>Back-End Developer | .NET | SQL | C#</p>
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a href="#top" class="brand">Rashad Asadli</a>
             <nav>
-                <ul>
+                <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li>
-                        <a href="downloads/Rashad_Asadli_CV.pdf" target="_blank" class="cv-download">
-                            Resume
-                        </a>
-                    </li>
                 </ul>
             </nav>
+            <a href="downloads/Rashad_Asadli_CV.pdf" target="_blank" class="button button-secondary">Resume</a>
         </div>
     </header>
 
-    <section id="about" class="container">
-        <h2>About Me</h2>
-        <p> Passionate Back-End developer since 2022, skilled in programming with Front-End knowledge. Focused on
-            building scalable solutions, optimizing performance, and driving innovation through continuous learning.</p>
-    </section>
-
-    <section id="projects" class="container">
-        <h2>Projects</h2>
-        <div class="carousel-wrapper">
-            <div class="swiper-button-prev">&#10094;</div>
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-
-                    <div class="swiper-slide project-card">
-                        <img src="images/sensible.png" alt="Sensible Accounting Screenshot" class="project-img">
-                        <h3>Sensible Accounting Software</h3>
-                        <p>Automated accounting system for sole proprietors using C#, .NET Core, and SQL. Reduced manual
-                            bookkeeping by 45% and query time by 30%.</p>
-                        <a href="https://sensible.az/" target="_blank" class="project-link">Visit Website</a>
+    <main id="top">
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">.NET BACKEND DEVELOPER</p>
+                    <h1>I build reliable web applications with C#, ASP.NET Core, SQL, and clean system design.</h1>
+                    <p class="hero-text">
+                        I focus on backend engineering, business logic, database-driven systems, and practical software that solves real business problems.
+                        My work spans accounting, e-commerce, reporting, automation, and internal business tools.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="button">View Projects</a>
+                        <a href="#contact" class="button button-secondary">Contact Me</a>
                     </div>
-
-                    <div class="swiper-slide project-card">
-                        <img src="images/kral.png" alt="Kral Inshaat Screenshot" class="project-img">
-                        <h3>Kral Inshaat Website</h3>
-                        <p>E-commerce platform with secure payment, live order tracking (Telegram bot), and a
-                            streamlined admin panel.</p>
-                        <a href="https://kral-insaat.millisoft.az/" target="_blank" class="project-link">Visit
-                            Website</a>
+                    <div class="highlights">
+                        <div>
+                            <strong>Backend Focus</strong>
+                            <span>.NET, APIs, SQL, EF</span>
+                        </div>
+                        <div>
+                            <strong>Real Projects</strong>
+                            <span>Accounting, e-commerce, reporting</span>
+                        </div>
+                        <div>
+                            <strong>Full Delivery</strong>
+                            <span>From database to deployment</span>
+                        </div>
                     </div>
-
-                    <div class="swiper-slide project-card">
-                        <img src="images/bakerfresh.png" alt="BakerFresh Screenshot" class="project-img">
-                        <h3>BakerFresh</h3>
-                        <p>Bakery management system in ASP.NET Core. Features user registration, product orders, and
-                            admin controls.</p>
-                        <a href="https://bakeryfresh-j2kx.onrender.com/index.html" target="_blank" class="project-link">Visit
-                            Website</a>
+                </div>
+                <div class="hero-card">
+                    <div class="hero-card-inner">
+                        <p class="card-label">Core Stack</p>
+                        <ul class="stack-list">
+                            <li>C# / ASP.NET Core</li>
+                            <li>.NET Web API / MVC</li>
+                            <li>SQL / Entity Framework</li>
+                            <li>JavaScript / React basics</li>
+                            <li>Clean architecture mindset</li>
+                        </ul>
                     </div>
-
-                    <div class="swiper-slide project-card">
-                        <img src="images/beyazmarket.png" alt="Beyaz Market Screenshot" class="project-img">
-                        <h3>Beyaz Market</h3>
-                        <p>Responsive grocery store website with multilingual support and Google Maps integration.</p>
-                        <a href="https://rasadli.github.io/beyazmarket/" target="_blank" class="project-link">Visit
-                            Website</a>
-                    </div>
-
-                    <div class="swiper-slide project-card">
-                        <img src="images/hesabat.png" alt="MS Accounting Screenshot" class="project-img">
-                        <h3>MS Accounting</h3>
-                        <p>Web app for school financial management with invoicing, reporting, and performance tracking.
-                        </p>
-                        <a href="https://hesabat.millisoft.az/" target="_blank" class="project-link">Visit
-                            Website</a>
-                    </div>
-
-                    <div class="swiper-slide project-card">
-                        <img src="images/recipe.jpeg" alt="Recipe Manager Screenshot" class="project-img">
-                        <h3>RecipeManagerApp</h3>
-                        <p>React app for recipe CRUD with tag filters, pagination, and drag-and-drop reordering.</p>
-                        <a href="https://github.com/rasadli/RecipeManagerApp" target="_blank" class="project-link">Visit
-                            Website</a>
-                    </div>
-
-                    <div class="swiper-slide project-card">
-                        <img src="images/autoformfiller.jpeg" alt="Auto Form Filler Screenshot" class="project-img">
-                        <h3>AutoFormFiller</h3>
-                        <p>Chrome extension using Node.js and jQuery to auto-fill job forms using LinkedIn data.</p>
-                        <a href="https://github.com/rasadli/AutoFormFiller" target="_blank" class="project-link">Visit
-                            Website</a>
-                    </div>
-
-                    <div class="swiper-slide project-card">
-                        <img src="images/library.jpeg" alt="Library System Screenshot" class="project-img">
-                        <h3>Library Management System</h3>
-                        <p>Java desktop app to manage personal book libraries with rating and categorization features.
-                        </p>
-                        <a href="https://github.com/rasadli/Libary-Managment" target="_blank" class="project-link">Visit
-                            Website</a>
-                    </div>
-
                 </div>
             </div>
-            <div class="swiper-button-next">&#10095;</div>
-        </div>
-    </section>
+        </section>
 
-
-    <section id="skills" class="container">
-        <h2>Skills</h2>
-        <div class="skills-grid">
-            <span>C#</span>
-            <span>.NET Web API</span>
-            <span>.NET MVC</span>
-            <span>SQL</span>
-            <span>Entity Framework</span>
-            <span>React.js</span>
-            <span>jQuery</span>
-            <span>Java</span>
-            <span>JavaScript</span>
-        </div>
-    </section>
-
-    <section id="experience" class="container">
-        <h2>Experience</h2>
-        <div class="experience-grid">
-            <div class="experience-card">
-                <h3>MS LLC (Software Developer)</h3>
-                <p>Developing accounting and e-commerce solutions.</p>
+        <section id="about" class="section">
+            <div class="container two-col">
+                <div>
+                    <p class="section-label">About</p>
+                    <h2>Developer with strong backend interest and product thinking</h2>
+                </div>
+                <div>
+                    <p>
+                        Since 2022, I have been building software with a strong interest in backend development, database design,
+                        and maintainable application structure. I enjoy turning business requirements into working systems that are
+                        scalable, practical, and easier to operate.
+                    </p>
+                    <p>
+                        My background includes accounting software, admin panels, e-commerce flows, automation features,
+                        and full-stack collaboration. I care about clean code, performance, and delivering features that create measurable value.
+                    </p>
+                </div>
             </div>
-            <div class="experience-card">
-                <h3>MS LLC (Full Stack Development Mentor)</h3>
-                <p>Mentored aspiring developers in full-stack development.</p>
-            </div>
-            <div class="experience-card">
-                <h3>MoonLin (ToorLin) Startup</h3>
-                <p>Developed front-end features for a gaming platform.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" class="container">
-        <h2>Contact</h2>
-        <div class="contact-links">
-            <a href="mailto:resadesedli26@gmail.com"><i class="fas fa-envelope"></i> resadesedli26@gmail.com</a>
-            <a href="https://www.linkedin.com/in/rashadasadli/" target="_blank"><i class="fab fa-linkedin"></i>
-                LinkedIn</a>
-            <a href="https://github.com/rasadli" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <a href="downloads/Rashad_Asadli_CV.pdf" download class="cv-download">
-                <i class="fas fa-download"></i> Download Resume
-            </a>
-        </div>
-    </section>
+        <section id="projects" class="section section-alt">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <p class="section-label">Selected work</p>
+                        <h2>Projects that show real delivery, not just tutorials</h2>
+                    </div>
+                </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Rashad Asadli. All Rights Reserved.</p>
+                <div class="project-grid">
+                    <article class="project-card">
+                        <img src="images/sensible.png" alt="Sensible Accounting Software screenshot" class="project-img">
+                        <div class="project-content">
+                            <div class="tag-row">
+                                <span>.NET</span><span>C#</span><span>SQL</span>
+                            </div>
+                            <h3>Sensible Accounting Software</h3>
+                            <p>Accounting platform for sole proprietors built with C#, .NET Core, and SQL. Designed to reduce manual bookkeeping effort and improve data access speed.</p>
+                            <a href="https://sensible.az/" target="_blank" class="project-link">Open project</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <img src="images/kral.png" alt="Kral Insaat screenshot" class="project-img">
+                        <div class="project-content">
+                            <div class="tag-row">
+                                <span>E-commerce</span><span>.NET</span><span>Automation</span>
+                            </div>
+                            <h3>Kral Insaat</h3>
+                            <p>E-commerce website with payment integration, order tracking support, and an admin workflow designed for day-to-day operations.</p>
+                            <a href="https://kral-insaat.millisoft.az/" target="_blank" class="project-link">Open project</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <img src="images/hesabat.png" alt="MasterSchool Portal screenshot" class="project-img">
+                        <div class="project-content">
+                            <div class="tag-row">
+                                <span>.NET 8</span><span>Clean Architecture</span><span>EdTech</span>
+                            </div>
+                            <h3>MasterSchool Portal</h3>
+                            <p>Production education management platform for training centers, covering students, groups, contracts, payments, salaries, attendance, study materials, reporting, and role-based dashboards in one system.</p>
+                            <a href="https://portal.masterschool.az/" target="_blank" class="project-link">Open project</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <img src="images/bakerfresh.png" alt="BakerFresh screenshot" class="project-img">
+                        <div class="project-content">
+                            <div class="tag-row">
+                                <span>ASP.NET Core</span><span>CRUD</span><span>Admin</span>
+                            </div>
+                            <h3>BakerFresh</h3>
+                            <p>Bakery management system with product ordering, account flows, and admin-side controls for daily business management.</p>
+                            <a href="https://bakeryfresh-j2kx.onrender.com/index.html" target="_blank" class="project-link">Open project</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <img src="images/recipe.jpeg" alt="Recipe Manager App screenshot" class="project-img">
+                        <div class="project-content">
+                            <div class="tag-row">
+                                <span>React</span><span>Frontend</span><span>CRUD</span>
+                            </div>
+                            <h3>Recipe Manager App</h3>
+                            <p>React-based CRUD application with filtering, pagination, and drag-and-drop interactions for managing recipe collections.</p>
+                            <a href="https://github.com/rasadli/RecipeManagerApp" target="_blank" class="project-link">View repository</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <img src="images/autoformfiller.jpeg" alt="Auto Form Filler screenshot" class="project-img">
+                        <div class="project-content">
+                            <div class="tag-row">
+                                <span>Extension</span><span>Node.js</span><span>Automation</span>
+                            </div>
+                            <h3>AutoFormFiller</h3>
+                            <p>Browser extension that speeds up repetitive job application forms by using profile data to automate repetitive input steps.</p>
+                            <a href="https://github.com/rasadli/AutoFormFiller" target="_blank" class="project-link">View repository</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <p class="section-label">Skills</p>
+                <h2>Technologies I use most</h2>
+                <div class="skill-groups">
+                    <div class="skill-card">
+                        <h3>Backend</h3>
+                        <div class="chip-wrap">
+                            <span>C#</span>
+                            <span>ASP.NET Core</span>
+                            <span>.NET Web API</span>
+                            <span>.NET MVC</span>
+                            <span>Entity Framework</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Database</h3>
+                        <div class="chip-wrap">
+                            <span>SQL</span>
+                            <span>SQL Server</span>
+                            <span>Query optimization</span>
+                            <span>Relational design</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Frontend / Other</h3>
+                        <div class="chip-wrap">
+                            <span>React.js</span>
+                            <span>JavaScript</span>
+                            <span>jQuery</span>
+                            <span>Java</span>
+                            <span>Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section section-alt">
+            <div class="container">
+                <p class="section-label">Experience</p>
+                <h2>Professional experience</h2>
+                <div class="timeline">
+                    <article class="timeline-item">
+                        <h3>MilliSoft Studio — Software Developer</h3>
+                        <p>Building and maintaining production .NET web platforms across accounting, e-commerce, and education management, with work spanning backend APIs, SQL optimization, admin workflows, payment integrations, and operational automation.</p>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>Sensible Accounting Software</h3>
+                        <p>Developed an online accounting system for sole proprietors, helping automate bookkeeping workflows, improve backend data processing, and reduce manual effort for day-to-day financial operations.</p>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>MasterSchool Portal</h3>
+                        <p>Designed and maintained a school management platform with modules for contracts, payments, salaries, attendance, reports, study materials, and role-based dashboards, supporting real operational control through a centralized portal.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section">
+            <div class="container contact-box">
+                <div>
+                    <p class="section-label">Contact</p>
+                    <h2>Let’s build something useful</h2>
+                    <p>I’m open to backend, .NET, and software engineering opportunities, especially where I can contribute to real products and keep growing fast.</p>
+                </div>
+                <div class="contact-links">
+                    <a href="mailto:resadesedli26@gmail.com"><i class="fas fa-envelope"></i><span>Email</span></a>
+                    <a href="https://www.linkedin.com/in/rashadasadli/" target="_blank"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+                    <a href="https://github.com/rasadli" target="_blank"><i class="fab fa-github"></i><span>GitHub</span></a>
+                    <a href="downloads/Rashad_Asadli_CV.pdf" download><i class="fas fa-file-arrow-down"></i><span>Resume</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-wrap">
+            <p>© 2026 Rashad Asadli</p>
+            <p>Built with HTML and CSS</p>
         </div>
     </footer>
 </body>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
-    const swiper = new Swiper('.mySwiper', {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-        },
-        breakpoints: {
-            480: {
-                slidesPerView: 1
-            },
-            640: {
-                slidesPerView: 2
-            },
-            768: {
-                slidesPerView: 2
-            },
-            900: {
-                slidesPerView: 3
-            },
-            1200: {
-                slidesPerView: 4
-            },
-            1600: {
-                slidesPerView: 5
-            }
-        }
-    });
-</script>
-
 </html>
