@@ -1,0 +1,4 @@
+# Private notes that must never reach the public site
+*.local.md
+# Local preview config
+.claude/
