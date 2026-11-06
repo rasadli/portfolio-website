@@ -1,17 +1,30 @@
 (() => {
-  const root = document.documentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Theme
-  const themeBtn = document.querySelector('.theme');
-  const label = () => themeBtn.setAttribute('aria-label', `Switch to ${root.dataset.theme === 'dark' ? 'light' : 'dark'} theme`);
-  label();
-  themeBtn.addEventListener('click', () => {
-    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) { /* private mode */ }
-    document.querySelector('meta[name="theme-color"]').content = root.dataset.theme === 'dark' ? '#0e1216' : '#f6f4ef';
-    label();
-  });
+  // Architecture Explorer: select a node to highlight its connections and show its note
+  const nodes = [...document.querySelectorAll('.node')];
+  if (nodes.length) {
+    const paths = [...document.querySelectorAll('.ex-paths path')];
+    const items = [...document.querySelectorAll('.ex-item')];
+    const group = document.querySelector('.ex-paths');
+    const select = (id) => {
+      const near = new Set();
+      paths.forEach((p) => {
+        const on = p.dataset.a === id || p.dataset.b === id;
+        p.classList.toggle('on', on);
+        if (on) { near.add(p.dataset.a); near.add(p.dataset.b); }
+      });
+      group.classList.add('has-sel');
+      nodes.forEach((n) => {
+        n.setAttribute('aria-pressed', String(n.dataset.node === id));
+        n.classList.toggle('near', near.has(n.dataset.node) && n.dataset.node !== id);
+      });
+      items.forEach((i) => i.classList.toggle('active', i.dataset.item === id));
+    };
+    nodes.forEach((n) => n.addEventListener('click', () => select(n.dataset.node)));
+    const first = nodes.find((n) => n.getAttribute('aria-pressed') === 'true') || nodes[0];
+    select(first.dataset.node);
+  }
 
   // Mobile menu
   const menu = document.querySelector('.menu');
@@ -26,7 +39,15 @@
     if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); menu.focus(); }
   });
 
-  // Scroll reveal (content stays visible without JS, see .js .reveal in CSS)
+  // Opening a linked role in the experience index
+  const openTarget = () => {
+    const t = location.hash && document.querySelector(location.hash);
+    if (t && t.tagName === 'DETAILS') t.open = true;
+  };
+  addEventListener('hashchange', openTarget);
+  openTarget();
+
+  // Section entrances. Content stays visible without JS (see .js .reveal in the CSS).
   const reveals = document.querySelectorAll('.reveal');
   if (reduce || !('IntersectionObserver' in window)) {
     reveals.forEach((el) => el.classList.add('in'));
@@ -35,7 +56,7 @@
       entries.forEach((en) => {
         if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
       });
-    }, { rootMargin: '0px 0px -8% 0px' });
+    }, { rootMargin: '0px 0px -6% 0px' });
     reveals.forEach((el) => io.observe(el));
   }
 

@@ -14,6 +14,7 @@ export const person = {
   employer: 'AzInTelecom',
   location: 'Baku, Azerbaijan',
   tagline: 'I build reliable software for real-world problems.',
+  statement: 'I build backend services in C# and .NET, working on secure APIs, data, and the architecture decisions behind them. Currently on the SİMA İmza digital-signature platform.',
   summary:
     'Software engineer specializing in .NET backend development, secure APIs and data-driven applications, with a growing focus on distributed systems and scalable architecture.',
   email: 'resadesedli26@gmail.com',
@@ -40,7 +41,7 @@ export const about = {
 // Waterfall in the hero. kind: work | teach | study. `to` is an anchor on the page.
 export const trace = [
   { label: 'ADA University', detail: 'BSc Information Technology', kind: 'study', start: '2022-09', end: '2027-06', expected: true, to: '#record' },
-  { label: 'MilliSoft', detail: 'Full-stack course', kind: 'study', start: '2022-10', end: '2023-06', to: '#about' },
+  { label: 'MilliSoft', detail: 'Full-stack course', kind: 'study', start: '2022-10', end: '2023-06', to: '#profile' },
   { label: 'ToorLin Tournaments', detail: 'Frontend Developer', kind: 'work', start: '2023-10', end: '2024-07', to: '#exp-toorlin' },
   { label: 'MilliSoft', detail: 'Full-stack mentor', kind: 'teach', start: '2024-01', end: '2024-06', to: '#teaching' },
   { label: 'MilliSoft Studio', detail: 'Software Engineer', kind: 'work', start: '2024-02', end: '2026-05', to: '#exp-millisoft' },
@@ -146,6 +147,7 @@ export const experience = [
 
 export const featuredProjects = [
   {
+    slug: 'masterschool',
     name: 'MasterSchool Portal',
     kicker: 'EdTech, production',
     lead: 'One system for running a training centre.',
@@ -161,6 +163,7 @@ export const featuredProjects = [
     size: 'wide',
   },
   {
+    slug: 'sensible',
     name: 'Sensible Accounting Software',
     kicker: 'Fintech, production',
     lead: 'Online bookkeeping for sole proprietors.',
@@ -173,6 +176,7 @@ export const featuredProjects = [
     image: { src: 'images/work/sensible.webp', w: 1400, h: 632, alt: 'Sensible accounting dashboard on a test tenant' },
   },
   {
+    slug: 'kral',
     name: 'Kral Inşaat',
     kicker: 'E-commerce, production',
     lead: 'A construction store and the tools to run it.',
@@ -185,6 +189,80 @@ export const featuredProjects = [
     image: { src: 'images/work/kral.webp', w: 1400, h: 639, alt: 'Kral Inşaat store catalogue with filters and products' },
   },
 ];
+
+// Case-study pages, one per featured project slug. Sections render only when filled in:
+// thesis, context, plates (+ platesCaption, platesTitle), decisions, evidence, reflection.
+// Add `decisions` and `reflection` only from real experience.
+export const studies = {
+  masterschool: {
+    thesis: 'A training centre has many records that depend on each other: students, groups, contracts, payments, salaries and attendance. The portal brings them into one place, so reporting does not depend on stitching separate tools together.',
+    context: [
+      ['Role', 'Contributed as a Software Engineer at MilliSoft Studio, including invoicing and reporting.'],
+      ['Scope', 'An education management platform with modules for daily operations and dashboards scoped to each role.'],
+      ['Stack', '.NET 8, C#, SQL, Clean Architecture.'],
+    ],
+    platesCaption: 'Module map of the portal’s areas. It does not show internal design or data relationships.',
+    plates: [
+      { t: 'Students', d: 'Student records' }, { t: 'Groups', d: 'Class organization' }, { t: 'Contracts', d: 'Enrollment agreements' },
+      { t: 'Payments', d: 'Payment tracking' }, { t: 'Salaries', d: 'Staff pay' }, { t: 'Attendance', d: 'Session records' },
+      { t: 'Materials', d: 'Study resources' }, { t: 'Reporting', d: 'Operational reports' }, { t: 'Dashboards', d: 'Scoped to each role' },
+    ],
+    evidence: 'The portal is live in production at portal.masterschool.az.',
+  },
+  sensible: {
+    thesis: 'Sole proprietors handle bookkeeping themselves and need quick access to their financial data. Sensible automates that bookkeeping online.',
+    context: [
+      ['Role', 'Developed backend features as a Software Engineer at MilliSoft Studio.'],
+      ['Scope', 'An accounting platform for sole proprietors, with a C# API for backend operations.'],
+      ['Stack', 'C#, .NET Core, SQL, JavaScript.'],
+    ],
+    evidence: 'Optimizing SQL stored procedures brought down average query time. The platform is live at sensible.az.',
+  },
+  kral: {
+    thesis: 'A construction retailer needs to sell online, give customers visibility of their orders, and manage inventory day to day.',
+    context: [
+      ['Role', 'Worked on the site as a Software Engineer at MilliSoft Studio, including the payment integration, Telegram bot and admin panel.'],
+      ['Stack', '.NET, C#, Telegram Bot API.'],
+    ],
+    platesCaption: 'The parts of the system I worked on. This is not an architecture diagram.',
+    plates: [
+      { t: 'Payment integration', d: 'Taking payment for online orders' },
+      { t: 'Telegram bot', d: 'Order tracking outside the website' },
+      { t: 'Admin panel', d: 'Day-to-day inventory management' },
+    ],
+    evidence: 'The store is live at kral-insaat.millisoft.az.',
+  },
+};
+
+// Hero Architecture Explorer: a generic backend, not any employer's system.
+// x/y are drawing coordinates in a 720 x 520 viewBox. `work` must be supported by the CV.
+export const explorer = {
+  caption: 'Fig. 1. A generic backend, drawn as a concept. It is not a map of any employer’s system.',
+  initial: 'api',
+  nodes: [
+    { id: 'client', ref: 'A1', label: 'Client', x: 100, y: 90, role: 'The web or mobile app making the request.', concept: 'Released mobile apps cannot be updated instantly, so an API has to keep working for older versions.', work: 'Migrated mobile client APIs while keeping released iOS and Android apps working.' },
+    { id: 'api', ref: 'B1', label: 'API layer', x: 265, y: 90, role: 'The contract between clients and the system.', concept: 'Versioning lets a contract change without breaking the clients that already depend on it.', work: 'REST APIs in ASP.NET Core, including support for several protocol versions.' },
+    { id: 'verify', ref: 'B2', label: 'Verification', x: 265, y: 250, role: 'Decides whether a request can be trusted.', concept: 'Checks at the edge stop an untrusted request before it reaches business logic.', work: 'Signature verification for mobile API requests.' },
+    { id: 'service', ref: 'C1', label: 'Services', x: 455, y: 90, role: 'Where the business rules live.', concept: 'Keeping rules apart from transport and storage makes them easier to test and change.', work: 'Backend services in C# and .NET 8.' },
+    { id: 'cache', ref: 'D1', label: 'Cache', x: 630, y: 90, role: 'Serves repeated reads quickly.', concept: 'Speed comes with a trade-off: a cache can serve data that is out of date.', work: 'Services using Redis.' },
+    { id: 'data', ref: 'C2', label: 'Data store', x: 455, y: 250, role: 'The durable record of what happened.', concept: 'Schema and query design decide how the system behaves as data grows.', work: 'SQL Server stored procedures and query optimization, plus MongoDB.' },
+    { id: 'events', ref: 'D2', label: 'Event stream', x: 630, y: 250, role: 'Passes work between services without tying them together.', concept: 'A service can publish an event without waiting for whoever consumes it, but consumers must cope with delay and retries.', work: 'Event-driven services with Kafka.' },
+    { id: 'worker', ref: 'D3', label: 'Background work', x: 630, y: 410, role: 'Handles work that should not hold up a request.', concept: 'Moving slow work out of the request keeps responses fast, as long as failures can be retried safely.', work: 'Hangfire is part of my toolkit.' },
+    { id: 'logs', ref: 'B3', label: 'Logs and errors', x: 265, y: 410, role: 'Shows what the system actually did.', concept: 'In a distributed system, one problem can cross several services, so tracing it depends on good signals.', work: 'Investigating issues in distributed services with logs and Sentry.' },
+  ],
+  edges: [
+    { a: 'client', b: 'api', d: 'M100 90H265' },
+    { a: 'api', b: 'service', d: 'M265 90H455' },
+    { a: 'api', b: 'verify', d: 'M265 90V250' },
+    { a: 'service', b: 'cache', d: 'M455 90H630' },
+    { a: 'service', b: 'data', d: 'M455 90V250' },
+    { a: 'service', b: 'events', d: 'M455 90V170H630V250' },
+    { a: 'events', b: 'worker', d: 'M630 250V410' },
+    { a: 'worker', b: 'data', d: 'M630 410H455V250' },
+    { a: 'worker', b: 'logs', d: 'M630 410H265' },
+    { a: 'verify', b: 'logs', d: 'M265 250V410' },
+  ],
+};
 
 export const otherProjects = [
   { name: 'BakerFresh', what: 'Bakery management system with ordering, accounts and admin controls.', stack: 'ASP.NET Core', href: 'https://bakeryfresh-j2kx.onrender.com/index.html', linkLabel: 'Demo' },
@@ -234,6 +312,27 @@ export const research = {
   lead: 'When a payment is very small, the cost of settling it alone can matter more than the payment. Batching fixes that and creates a new problem: every payment waits for its batch.',
   summary:
     'My graduation project at ADA University designs an adaptive, machine-learning-based batching system for micropayment settlement in distributed environments, with a focus on payments in Azerbaijani manat (AZN). It evaluates transaction throughput, confirmation latency, settlement overhead and fault tolerance against fixed batching strategies.',
+  context: [
+    ['Type', 'Senior design project at ADA University, 2026–2027.'],
+    ['Direction', 'An adaptive, machine-learning-based batching system for micropayment settlement in distributed environments.'],
+    ['Measures', 'Transaction throughput, confirmation latency, settlement overhead and fault tolerance.'],
+  ],
+  flow: [
+    { t: 'Payments arrive', d: 'Many small transactions, at uneven rates' },
+    { t: 'Batching decision', d: 'A fixed rule, or an adaptive model', key: true },
+    { t: 'Settlement', d: 'One batch, one settlement' },
+    { t: 'Confirmation', d: 'The payer and merchant get an answer' },
+  ],
+  flowCaption: 'Fig. 2. The conceptual flow under study, with the decision point marked. It is not an implementation.',
+  decision: {
+    question: 'When should a batch close?',
+    options: [
+      { t: 'Fixed batching', d: 'The baseline. A set schedule or size, simple and predictable, whatever the traffic is doing.' },
+      { t: 'Adaptive batching', d: 'The proposal. A learned model decides, then gets measured against the fixed strategies on the same criteria.' },
+    ],
+  },
+  // Add real results here as { measure, fixed, adaptive, note } when they exist. Renders as a table.
+  results: [],
   statusNote: 'The project is in progress. It has no published results or papers yet, so this page describes the question and not an answer.',
   concepts: [
     { term: 'Micropayment processing', text: 'Handling large numbers of very low-value payments, where per-transaction costs weigh heavily on each one.' },
