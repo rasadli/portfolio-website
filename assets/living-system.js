@@ -13,6 +13,12 @@ const motionBtn = document.getElementById('ls-motion');
 const resetBtn = document.getElementById('ls-reset');
 const hint = document.getElementById('ls-hint');
 
+// The open panel must stop above the footer, whose height varies with width and copy.
+const foot = root.querySelector('.ls-foot');
+const setFoot = () => root.style.setProperty('--ls-foot', `${foot.offsetHeight}px`);
+setFoot();
+new ResizeObserver(setFoot).observe(foot);
+
 const mqFlow = matchMedia('(max-width: 820px)');
 const mqReduce = matchMedia('(prefers-reduced-motion: reduce)');
 const coarse = matchMedia('(pointer: coarse)').matches;
