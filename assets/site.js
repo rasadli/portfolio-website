@@ -1,31 +1,6 @@
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Architecture Explorer: select a node to highlight its connections and show its note
-  const nodes = [...document.querySelectorAll('.node')];
-  if (nodes.length) {
-    const paths = [...document.querySelectorAll('.ex-paths path')];
-    const items = [...document.querySelectorAll('.ex-item')];
-    const group = document.querySelector('.ex-paths');
-    const select = (id) => {
-      const near = new Set();
-      paths.forEach((p) => {
-        const on = p.dataset.a === id || p.dataset.b === id;
-        p.classList.toggle('on', on);
-        if (on) { near.add(p.dataset.a); near.add(p.dataset.b); }
-      });
-      group.classList.add('has-sel');
-      nodes.forEach((n) => {
-        n.setAttribute('aria-pressed', String(n.dataset.node === id));
-        n.classList.toggle('near', near.has(n.dataset.node) && n.dataset.node !== id);
-      });
-      items.forEach((i) => i.classList.toggle('active', i.dataset.item === id));
-    };
-    nodes.forEach((n) => n.addEventListener('click', () => select(n.dataset.node)));
-    const first = nodes.find((n) => n.getAttribute('aria-pressed') === 'true') || nodes[0];
-    select(first.dataset.node);
-  }
-
   // Mobile menu
   const menu = document.querySelector('.menu');
   const nav = document.getElementById('nav');

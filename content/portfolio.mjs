@@ -14,6 +14,7 @@ export const person = {
   employer: 'AzInTelecom',
   location: 'Baku, Azerbaijan',
   tagline: 'I build reliable software for real-world problems.',
+  focus: ['.NET backend', 'Secure APIs', 'Data systems', 'Distributed services'],
   statement: 'I build backend services in C# and .NET, working on secure APIs, data, and the architecture decisions behind them. Currently on the SİMA İmza digital-signature platform.',
   summary:
     'Software engineer specializing in .NET backend development, secure APIs and data-driven applications, with a growing focus on distributed systems and scalable architecture.',
@@ -234,33 +235,76 @@ export const studies = {
   },
 };
 
-// Hero Architecture Explorer: a generic backend, not any employer's system.
-// x/y are drawing coordinates in a 720 x 520 viewBox. `work` must be supported by the CV.
+// Hero: The Living System. A generic backend drawn as an exploded axonometric, not any employer's system.
+// layers: top to bottom. place: [layer, x, z] on a plate (x within ±4, z within ±1.8).
+// `work` must be supported by the CV. `related` links are reading paths into the portfolio.
 export const explorer = {
-  caption: 'Fig. 1. A generic backend, drawn as a concept. It is not a map of any employer’s system.',
-  initial: 'api',
+  caption: 'The Living System. A concept backend drawn as an exploded axonometric: four layers, nine components. It is not a map of any employer’s system.',
+  layers: [
+    { id: 'edge', code: 'L3', name: 'Edge' },
+    { id: 'app', code: 'L2', name: 'Application' },
+    { id: 'async', code: 'L1', name: 'Messaging' },
+    { id: 'store', code: 'L0', name: 'Persistence' },
+  ],
   nodes: [
-    { id: 'client', ref: 'A1', label: 'Client', x: 100, y: 90, role: 'The web or mobile app making the request.', concept: 'Released mobile apps cannot be updated instantly, so an API has to keep working for older versions.', work: 'Migrated mobile client APIs while keeping released iOS and Android apps working.' },
-    { id: 'api', ref: 'B1', label: 'API layer', x: 265, y: 90, role: 'The contract between clients and the system.', concept: 'Versioning lets a contract change without breaking the clients that already depend on it.', work: 'REST APIs in ASP.NET Core, including support for several protocol versions.' },
-    { id: 'verify', ref: 'B2', label: 'Verification', x: 265, y: 250, role: 'Decides whether a request can be trusted.', concept: 'Checks at the edge stop an untrusted request before it reaches business logic.', work: 'Signature verification for mobile API requests.' },
-    { id: 'service', ref: 'C1', label: 'Services', x: 455, y: 90, role: 'Where the business rules live.', concept: 'Keeping rules apart from transport and storage makes them easier to test and change.', work: 'Backend services in C# and .NET 8.' },
-    { id: 'cache', ref: 'D1', label: 'Cache', x: 630, y: 90, role: 'Serves repeated reads quickly.', concept: 'Speed comes with a trade-off: a cache can serve data that is out of date.', work: 'Services using Redis.' },
-    { id: 'data', ref: 'C2', label: 'Data store', x: 455, y: 250, role: 'The durable record of what happened.', concept: 'Schema and query design decide how the system behaves as data grows.', work: 'SQL Server stored procedures and query optimization, plus MongoDB.' },
-    { id: 'events', ref: 'D2', label: 'Event stream', x: 630, y: 250, role: 'Passes work between services without tying them together.', concept: 'A service can publish an event without waiting for whoever consumes it, but consumers must cope with delay and retries.', work: 'Event-driven services with Kafka.' },
-    { id: 'worker', ref: 'D3', label: 'Background work', x: 630, y: 410, role: 'Handles work that should not hold up a request.', concept: 'Moving slow work out of the request keeps responses fast, as long as failures can be retried safely.', work: 'Hangfire is part of my toolkit.' },
-    { id: 'logs', ref: 'B3', label: 'Logs and errors', x: 265, y: 410, role: 'Shows what the system actually did.', concept: 'In a distributed system, one problem can cross several services, so tracing it depends on good signals.', work: 'Investigating issues in distributed services with logs and Sentry.' },
+    { id: 'client', label: 'Client', place: ['edge', -2.9, 0.2], role: 'The web or mobile app making the request.', concept: 'Released mobile apps cannot be updated instantly, so an API has to keep working for older versions.', work: 'Migrated mobile client APIs while keeping released iOS and Android apps working.', related: ['#exp-azintelecom', 'Experience: keeping released mobile apps working'] },
+    { id: 'api', label: 'API layer', place: ['edge', -0.5, 0.2], role: 'The contract between clients and the system.', concept: 'Versioning lets a contract change without breaking the clients that already depend on it.', work: 'REST APIs in ASP.NET Core, including support for several protocol versions.', related: ['#log', 'Engineering log: supporting several protocol versions'] },
+    { id: 'verify', label: 'Verification', place: ['edge', 2.3, 1.2], role: 'Decides whether a request can be trusted.', concept: 'Checks at the edge stop an untrusted request before it reaches business logic.', work: 'Signature verification for mobile API requests.', related: ['#exp-azintelecom', 'Experience: signature verification'] },
+    { id: 'service', label: 'Services', place: ['app', -0.5, 0.2], role: 'Where the business rules live.', concept: 'Keeping rules apart from transport and storage makes them easier to test and change.', work: 'Backend services in C# and .NET 8.', related: ['work/masterschool.html', 'Case study: MasterSchool Portal'] },
+    { id: 'cache', label: 'Cache', place: ['app', 2.3, -0.8], role: 'Serves repeated reads quickly.', concept: 'Speed comes with a trade-off: a cache can serve data that is out of date.', work: 'Services using Redis.', related: ['#expertise', 'Expertise: databases and storage'] },
+    { id: 'events', label: 'Event stream', place: ['async', 1.0, 1.0], role: 'Passes work between services without tying them together.', concept: 'A service can publish an event without waiting for whoever consumes it, but consumers must cope with delay and retries.', work: 'Event-driven services with Kafka.', related: ['#exp-azintelecom', 'Experience: event-driven services'] },
+    { id: 'worker', label: 'Background work', place: ['async', 2.9, -0.4], role: 'Handles work that should not hold up a request.', concept: 'Moving slow work out of the request keeps responses fast, as long as failures can be retried safely.', work: 'Hangfire is part of my toolkit.', related: ['#lab', 'Transaction Laboratory: batching work for settlement'] },
+    { id: 'data', label: 'Data store', place: ['store', -0.5, 0.2], role: 'The durable record of what happened.', concept: 'Schema and query design decide how the system behaves as data grows.', work: 'SQL Server stored procedures and query optimization, plus MongoDB.', related: ['work/sensible.html', 'Case study: Sensible accounting'] },
+    { id: 'logs', label: 'Logs and errors', place: ['store', 2.7, 1.4], role: 'Shows what the system actually did.', concept: 'In a distributed system, one problem can cross several services, so tracing it depends on good signals.', work: 'Investigating issues in distributed services with logs and Sentry.', related: ['#log', 'Engineering log'] },
   ],
   edges: [
-    { a: 'client', b: 'api', d: 'M100 90H265' },
-    { a: 'api', b: 'service', d: 'M265 90H455' },
-    { a: 'api', b: 'verify', d: 'M265 90V250' },
-    { a: 'service', b: 'cache', d: 'M455 90H630' },
-    { a: 'service', b: 'data', d: 'M455 90V250' },
-    { a: 'service', b: 'events', d: 'M455 90V170H630V250' },
-    { a: 'events', b: 'worker', d: 'M630 250V410' },
-    { a: 'worker', b: 'data', d: 'M630 410H455V250' },
-    { a: 'worker', b: 'logs', d: 'M630 410H265' },
-    { a: 'verify', b: 'logs', d: 'M265 250V410' },
+    { a: 'client', b: 'api' },
+    { a: 'api', b: 'service' },
+    { a: 'api', b: 'verify' },
+    { a: 'service', b: 'cache' },
+    { a: 'service', b: 'data' },
+    { a: 'service', b: 'events', async: true },
+    { a: 'events', b: 'worker', async: true },
+    { a: 'worker', b: 'data' },
+    { a: 'worker', b: 'logs' },
+    { a: 'verify', b: 'logs' },
+  ],
+  // Illustrative request journeys. Each consecutive pair must be an edge above.
+  journeys: [
+    { name: 'Cached read', ids: ['client', 'api', 'service', 'cache', 'service', 'api', 'client'] },
+    { name: 'Signed request', ids: ['client', 'api', 'verify', 'api', 'service', 'data', 'service', 'api', 'client'] },
+    { name: 'Job writes its result', ids: ['service', 'events', 'worker', 'data'] },
+    { name: 'Rejected request', ids: ['client', 'api', 'verify', 'logs'] },
+    { name: 'Job reports an error', ids: ['service', 'events', 'worker', 'logs'] },
+  ],
+};
+
+// Transaction Laboratory: a simulation of fixed batching policies. Every number it shows is
+// computed from the model described here. It is not data from the graduation project.
+export const lab = {
+  title: 'Transaction Laboratory',
+  heading: 'When should a batch close?',
+  intro: 'A small simulation of the question behind my graduation project. Payments arrive at random, a fixed policy decides when to close a batch, and one settlement channel processes batches in order. Change the inputs and watch confirmation delay and settlement overhead pull against each other.',
+  disclaimer: 'Simulation output from a simplified model. These are not measurements from a production system or results from the project.',
+  notAi: 'The project will compare an adaptive, learned policy against fixed baselines like these. That policy is not implemented here, so nothing on this page is AI-optimized.',
+  policies: [
+    { id: 'hybrid', name: 'Size or time', text: 'Close when the batch reaches its size limit, or when its oldest payment has waited the maximum time.' },
+    { id: 'interval', name: 'Fixed interval', text: 'Close every interval, however many payments are waiting. The size limit does not apply.' },
+    { id: 'size', name: 'Size only', text: 'Close only when the batch is full. Payments can wait indefinitely when traffic is slow.' },
+    { id: 'none', name: 'No batching', text: 'Settle every payment on its own. The baseline that batching is meant to improve.' },
+  ],
+  assumptions: [
+    'Payments arrive as a Poisson process at the chosen rate. Each run uses a fixed random seed, so the same inputs always give the same output.',
+    'One settlement channel handles one batch at a time, in the order batches close. A batch of n payments takes the settlement overhead plus 0.2 ms per payment.',
+    'A payment is confirmed when its batch finishes settling. Confirmation delay is the time from arrival to that moment.',
+    'Each run covers 60 seconds of simulated arrivals. Batches still open at the end are not counted as confirmed.',
+    'There are no failures, retries, network delays or fees in the model. Fault tolerance, which the project also studies, is out of scope here.',
+  ],
+  metrics: [
+    { term: 'Mean and 95th-percentile delay', text: 'Confirmation delay for every payment in a closed batch, including batches that finish settling after arrivals stop.' },
+    { term: 'Throughput', text: 'Payments whose settlement finished within the 60-second run, per second.' },
+    { term: 'Overhead per payment', text: 'Settlement overhead divided by the mean batch size. Compared with no batching, it shrinks by the same factor that the batch grows.' },
+    { term: 'Channel load', text: 'Time the settlement channel spends busy, divided by the length of the run. Above 100%, batches close faster than they can be settled and the backlog grows.' },
   ],
 };
 

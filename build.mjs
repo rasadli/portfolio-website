@@ -17,7 +17,7 @@ const ext = (href, label, cls = '') => `<a href="${esc(href)}" target="_blank" r
 const arrow = '<span aria-hidden="true">↗</span>';
 
 /* ---------- Page shell ---------- */
-function page({ base, title, description, canonical, body, jsonLd }) {
+function page({ base, title, description, canonical, body, jsonLd, head = '' }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +46,8 @@ function page({ base, title, description, canonical, body, jsonLd }) {
 <link rel="stylesheet" href="${base}assets/site.css">
 ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>` : ''}
 <script src="${base}assets/site.js" defer></script>
-</head>
+${head ? `${head}
+` : ''}</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 ${header(base)}
@@ -84,36 +85,109 @@ const secHead = (num, label, title, intro) => `<header class="sec-head">
   ${intro ? `<p class="sec-intro">${esc(intro)}</p>` : ''}
 </header>`;
 
-/* ---------- Architecture Explorer ---------- */
-function explorer() {
-  const { nodes, edges, initial, caption } = c.explorer;
-  const byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
-  const links = (id) => edges.filter((e) => e.a === id || e.b === id).map((e) => byId[e.a === id ? e.b : e.a].label);
-  const paths = edges.map((e) => `<path pathLength="1" data-a="${e.a}" data-b="${e.b}" d="${e.d}"/>`).join('');
-  const refs = ['A', 'B', 'C', 'D'].map((l, i) => `<text x="${[100, 265, 455, 630][i]}" y="18" text-anchor="middle">${l}</text>`).join('')
-    + ['1', '2', '3'].map((l, i) => `<text x="10" y="${[94, 254, 414][i]}">${l}</text>`).join('');
-  const buttons = nodes.map((n) => `<button type="button" class="node" data-node="${n.id}" aria-pressed="${n.id === initial}" style="left:${(n.x / 720 * 100).toFixed(2)}%;top:${(n.y / 520 * 100).toFixed(2)}%"><span class="node-ref">${n.ref}</span>${esc(n.label)}</button>`).join('');
-  const items = nodes.map((n) => `<div class="ex-item" data-item="${n.id}">
-      <h2>${esc(n.label)}</h2>
-      <p class="ex-role">${esc(n.role)}</p>
-      <p>${esc(n.concept)}</p>
-      <dl class="ex-meta">
-        <div><dt>In my work</dt><dd>${esc(n.work)}</dd></div>
-        <div><dt>Connects to</dt><dd>${esc(links(n.id).join(', '))}</dd></div>
-      </dl>
-    </div>`).join('');
-  return `<figure class="explorer" aria-labelledby="ex-cap">
-    <div class="ex-plate">
-      <svg class="ex-lines" viewBox="0 0 720 520" aria-hidden="true">
-        <g class="ex-refs">${refs}</g>
-        <g class="ex-marks"><path d="M28 28h14M28 28v14M692 28h-14M692 28v14M28 492h14M28 492v-14M692 492h-14M692 492v-14"/></g>
-        <g class="ex-paths">${paths}</g>
-      </svg>
-      <div class="ex-nodes" role="group" aria-label="Components of the concept diagram. Select one to read about it.">${buttons}</div>
+/* ---------- The Living System (hero) ---------- */
+// The 3D model, labels and article are drawn by assets/living-system.js from content.explorer.
+// The component index below is static, so the hero still works without WebGL or JavaScript.
+function systemIndex() {
+  const { layers, nodes } = c.explorer;
+  return `<nav class="ls-index" id="ls-index" aria-label="Components of the concept model">${layers.map((L) => `<div class="ls-ix-layer"><p class="ls-ix-code"><b>${L.code}</b>${esc(L.name)}</p><ul>${
+    nodes.filter((n) => n.place[0] === L.id).map((n) => `<li><button type="button" data-node="${n.id}" aria-pressed="false">${esc(n.label)}</button></li>`).join('')
+  }</ul></div>`).join('')}</nav>`;
+}
+
+function hero() {
+  const p = c.person;
+  return `<section class="ls" id="top" aria-labelledby="ls-title">
+  <div class="ls-copy">
+    <p class="ls-kicker">${esc(p.location)} <span aria-hidden="true">/</span> ${esc(p.role)} at ${esc(p.employer)}</p>
+    <h1 id="ls-title">${esc(p.name)}<span class="ls-role"><span class="sr-only">, </span>${esc(p.role)}</span></h1>
+    <div class="ls-intro">
+      <p class="ls-focus">${p.focus.map((f) => `<span>${esc(f)}</span>`).join('')}</p>
+      <p class="ls-sum">${esc(p.statement)}</p>
+      <div class="ls-actions">
+        <a class="btn btn-solid" href="#work">See the work</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+      <p class="ls-links">${ext(p.github, 'GitHub')} ${ext(p.linkedin, 'LinkedIn')} <a href="${p.resume}">Résumé (PDF)</a></p>
     </div>
-    <div class="ex-panel" aria-live="polite">${items}</div>
-    <figcaption id="ex-cap">${esc(caption)}</figcaption>
-  </figure>`;
+    <div class="ls-panel" id="ls-panel" aria-live="polite" hidden></div>
+  </div>
+  <div class="ls-stage" id="ls-stage" role="group" aria-label="The Living System, an interactive concept model of a backend in four layers. Use the component buttons to explore it.">
+    <div class="ls-plates" id="ls-plates" aria-hidden="true"></div>
+    <div class="ls-labels" id="ls-labels"></div>
+  </div>
+  ${systemIndex()}
+  <div class="ls-foot">
+    <p class="ls-cap"><span>Fig. 1</span> ${esc(c.explorer.caption)}<span class="ls-hint" id="ls-hint">Drag to turn. Select a component.</span></p>
+    <div class="ls-trace" id="ls-trace" aria-hidden="true"></div>
+    <div class="ls-tools">
+      <button type="button" class="ls-btn" id="ls-motion" aria-pressed="false">Pause requests</button>
+      <button type="button" class="ls-btn" id="ls-reset">Reset view</button>
+    </div>
+  </div>
+</section>
+<script>if (matchMedia('(max-width: 820px)').matches) document.getElementById('top').classList.add('is-flow');</script>`;
+}
+
+/* ---------- Transaction Laboratory ---------- */
+// Markup only. assets/lab.js runs the simulation and draws every figure from its output.
+const LAB_FIELDS = [
+  ['rate', 'Arrival rate', 'Payments per second'],
+  ['size', 'Batch size limit', 'Payments per batch'],
+  ['wait', 'Maximum wait', 'Or the interval, for fixed-interval batching'],
+  ['overhead', 'Settlement overhead', 'Fixed time to settle one batch'],
+];
+function lab() {
+  const l = c.lab;
+  return `<div class="lab" id="lab">
+  <header class="lab-head">
+    <p class="tag"><span class="tag-num">Fig. 3</span> ${esc(l.title)}</p>
+    <h3>${esc(l.heading)}</h3>
+    <p class="lab-intro">${esc(l.intro)}</p>
+  </header>
+  <noscript><p class="lab-nojs">The laboratory needs JavaScript to run. The model it uses is described below.</p></noscript>
+  <div class="lab-app" id="lab-app" hidden>
+    <form class="lab-controls" id="lab-form" aria-label="Simulation inputs">
+      <fieldset class="lab-policy">
+        <legend>Batching policy</legend>
+        ${l.policies.map((p, i) => `<label><input type="radio" name="policy" value="${p.id}"${i === 0 ? ' checked' : ''}><span>${esc(p.name)}</span></label>`).join('')}
+      </fieldset>
+      <p class="lab-policy-note" id="lab-policy-note">${esc(l.policies[0].text)}</p>
+      ${LAB_FIELDS.map(([id, label, hint]) => `<div class="lab-field" data-field="${id}">
+        <label for="lab-${id}">${label}</label><output id="lab-${id}-out" for="lab-${id}"></output>
+        <input type="range" id="lab-${id}" name="${id}" min="0" max="1000" step="1" aria-describedby="lab-${id}-hint">
+        <p class="lab-hint" id="lab-${id}-hint">${hint}</p>
+      </div>`).join('')}
+      <div class="lab-run"><button type="button" class="lab-btn" id="lab-seed">New random seed</button><span class="mono" id="lab-seed-out"></span></div>
+    </form>
+    <div class="lab-out">
+      <figure class="lab-bench">
+        <div class="lab-bench-head"><figcaption>One run, replayed: <span id="lab-clock" class="mono"></span></figcaption><button type="button" class="lab-btn" id="lab-play" aria-pressed="false">Pause</button></div>
+        <canvas id="lab-timeline" role="img" aria-label="Timeline of the current simulation run, showing arrivals, the waiting queue and settlement of each batch."></canvas>
+        <p class="lab-key"><i class="k-wait"></i>waiting <i class="k-settle"></i>settling <i class="k-done"></i>confirmed</p>
+      </figure>
+      <div class="lab-results" aria-live="polite">
+        <dl class="lab-metrics" id="lab-metrics"></dl>
+        <p class="lab-flag" id="lab-flag" hidden></p>
+      </div>
+      <figure class="lab-curves">
+        <figcaption id="lab-curves-cap">The trade-off, from the same model</figcaption>
+        <div class="lab-charts" id="lab-charts"></div>
+        <details class="lab-table"><summary>Show as a table</summary><div id="lab-table"></div></details>
+      </figure>
+    </div>
+  </div>
+  <p class="lab-disclaimer">${esc(l.disclaimer)}</p>
+  <details class="lab-model">
+    <summary>The model and its assumptions</summary>
+    <div class="lab-model-body">
+      <div><h4 class="tag">Policies</h4><dl class="concepts">${l.policies.map((p) => `<div><dt>${esc(p.name)}</dt><dd>${esc(p.text)}</dd></div>`).join('')}</dl></div>
+      <div><h4 class="tag">Assumptions</h4><ol class="lab-list">${l.assumptions.map((a) => `<li>${esc(a)}</li>`).join('')}</ol></div>
+      <div><h4 class="tag">What the numbers mean</h4><dl class="concepts">${l.metrics.map((m) => `<div><dt>${esc(m.term)}</dt><dd>${esc(m.text)}</dd></div>`).join('')}</dl></div>
+      <p class="pull">${esc(l.notAi)}</p>
+    </div>
+  </details>
+</div>`;
 }
 
 /* ---------- Career timeline, drawn to scale ---------- */
@@ -139,7 +213,7 @@ function timeline() {
   }).join('\n');
   const ticks = years.map((y) => `<span style="left:${pct(toIndex(`${y}-01`)).toFixed(2)}%">${y}</span>`).join('');
   return `<figure class="tl" style="--now:${nowPct.toFixed(2)}%">
-    <figcaption class="tl-cap"><span>Fig. 3. Career, drawn to scale</span><span class="tl-key"><i class="k-work"></i>Engineering <i class="k-teach"></i>Teaching <i class="k-study"></i>Study</span></figcaption>
+    <figcaption class="tl-cap"><span>Fig. 4. Career, drawn to scale</span><span class="tl-key"><i class="k-work"></i>Engineering <i class="k-teach"></i>Teaching <i class="k-study"></i>Study</span></figcaption>
     <div class="tl-axis" aria-hidden="true"><div>${ticks}<span class="tl-now" style="left:${nowPct.toFixed(2)}%">today</span></div></div>
     <ol class="tl-rows">${rows}</ol>
   </figure>`;
@@ -195,24 +269,6 @@ const flow = () => `<figure class="flow-fig">
 </figure>`;
 
 /* ---------- Home sections ---------- */
-function hero() {
-  const p = c.person;
-  return `<section class="hero" id="top"><div class="wrap hero-grid">
-  <div class="hero-id">
-    <p class="tag">${esc(p.location)}</p>
-    <h1>Rashad<br>Asadli.</h1>
-    <p class="hero-role">${esc(p.role)} <span>at ${esc(p.employer)}</span></p>
-    <p class="hero-sum">${esc(p.statement)}</p>
-    <div class="hero-actions">
-      <a class="btn btn-solid" href="#work">See the work</a>
-      <a class="btn" href="#contact">Contact</a>
-    </div>
-    <p class="hero-links">${ext(p.github, `GitHub ${arrow}`)} ${ext(p.linkedin, `LinkedIn ${arrow}`)} <a href="${p.resume}">Résumé (PDF)</a></p>
-  </div>
-  ${explorer()}
-</div></section>`;
-}
-
 function profileSection() {
   return `<section class="sec wrap" id="profile">
   <div class="split">
@@ -268,7 +324,8 @@ function researchSection() {
     <div class="prose reveal"><p class="lede">${esc(r.lead)}</p><p>${esc(r.summary)}</p>
     <p><a class="link" href="work/${r.slug}.html">Read the project overview <span aria-hidden="true">→</span></a></p></div>
   </div>
-  <div class="reveal">${flow()}${batchDiagram()}</div>
+  <div class="reveal">${flow()}</div>
+  ${lab()}
 </div></section>`;
 }
 
@@ -422,7 +479,7 @@ function researchPage() {
   ${studySections([
     ['Project thesis', `<p class="lede">${esc(r.summary)}</p>`],
     ['Engineering context', contextList(r.context)],
-    ['Architecture study', `${flow()}${batchDiagram()}`],
+    ['Architecture study', `${flow()}${batchDiagram()}<p class="st-lab"><a class="link" href="../index.html#lab">Try fixed batching policies in the Transaction Laboratory <span aria-hidden="true">→</span></a></p>`],
     ['Design decisions', `<p class="lede">${esc(r.decision.question)}</p><div class="plates plates-2">${r.decision.options.map((o) => `<div><b>${esc(o.t)}</b><span>${esc(o.d)}</span></div>`).join('')}</div>`],
     ['Concepts', `<dl class="concepts">${r.concepts.map((k) => `<div><dt>${esc(k.term)}</dt><dd>${esc(k.text)}</dd></div>`).join('')}</dl>`],
     ['Evidence', `${results}<p class="pull">${esc(r.statusNote)}</p>`],
@@ -440,6 +497,10 @@ function researchPage() {
 }
 
 /* ---------- Output ---------- */
+const HOME_HEAD = `<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js" } }</script>
+<link rel="modulepreload" href="content/portfolio.mjs">
+<script type="module" src="assets/living-system.js"></script>
+<script type="module" src="assets/lab.js"></script>`;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -460,6 +521,7 @@ writeFileSync('index.html', page({
   description: c.site.description,
   canonical: c.site.url,
   jsonLd,
+  head: HOME_HEAD,
   body: [hero(), profileSection(), workSection(), researchSection(), logSection(), experienceSection(), expertiseSection(), recordSection(), contactSection()].join('\n'),
 }));
 for (const p of c.featuredProjects) writeFileSync(`work/${p.slug}.html`, studyPage(p));
