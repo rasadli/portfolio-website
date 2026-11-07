@@ -457,17 +457,16 @@ export const recognition = [
 ];
 
 export const community = [
-  { title: 'Event Manager, ADA ACM Student Chapter', when: 'Jan 2026 – Present', text: 'Organize technical and student-focused events at ADA University.' },
-  { title: 'Organizing team, DevFest Baku 2026', when: 'Oct 2026', text: 'Annual GDG Baku developer conference, held at ADA University, with the ADA ACM Student Chapter.' },
-  { title: 'Organizing team, TechFront Summit 2026', when: 'May 2026', text: 'Student technology summit at ADA University, with the ADA ACM Student Chapter.' },
+  { title: 'Event Manager, ADA ACM Student Chapter', when: 'Jan 2026 – Present', text: 'Organize the chapter’s technical events and tournaments for students at ADA University.' },
+  { title: 'Volunteer, DevFest Baku 2026', when: 'Oct 2026', text: 'GDG Baku’s annual developer conference, held at ADA University.' },
+  { title: 'Volunteer, TechFront: Exploring the Frontiers of Technology', when: 'Apr 2025', text: 'Academy–industry technology forum at ADA University, hosted by the ADA University Foundation with Azercell.' },
   { title: '“Hand in Hand for Children”', when: 'Dec 2025', text: 'Initiated a team project promoting digital literacy and online safety among children in an orphanage.' },
   { title: 'Startup programmes', when: '2024', text: 'Took ToorLin Tournaments through the VIVEKA Company Creation Program and SABAH.HUB incubation, after the KOICA accelerator.' },
   { title: 'Hackathons', when: 'University years', text: 'Took part in several with university friends.' },
-  { title: 'Volunteering', when: 'Various', text: 'COP29, Formula 1, ICPC and the English Olympiad at ADA, plus social work and exam proctoring at the university.' },
+  { title: 'Volunteering', when: 'Various', text: 'The English Olympiad at ADA, plus social work and exam proctoring at the university.' },
 ];
 
 export const beyond = [
-  { title: 'Kyokushin Karate', text: 'Six to seven years of training through school, winning titles at city and national level and joining Azerbaijan’s under-18 national team.' },
   { title: 'International study', text: 'An exchange semester at the University of Latvia in Riga added computer science coursework in a different academic system.' },
 ];
 
